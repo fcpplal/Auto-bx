@@ -1,10 +1,6 @@
-⚠️ 严正声明 (License & Copyright)
-本项目采用 CC BY-NC 4.0 协议进行分发。
-无论你是直接 Fork、修改源码还是重新分发，都必须保留原作者的署名，且严禁用于任何商业牟利行为。一经发现侵权，作者保留追究责任的权利。
+# 🚀 科学上网节点极速部署指南 (Sing-box + Cloudflare Tunnel) Railway
 
-# 🚀 科学上网节点极速部署指南 (Sing-box + Cloudflare Tunnel)
-
-本项目提供了一个基于 Docker 容器的轻量级、高隐匿性科学上网节点部署方案。通过集成 `sing-box` 和 `cloudflared`，你可以轻松地在各类云平台（如 Koyeb、Render 等）或个人 VPS 上一键构建安全隧道。
+本项目提供了一个基于 Docker 容器的轻量级、高隐匿性科学上网节点部署方案。通过集成 `sing-box` 和 `cloudflared`，你可以轻松地在各类云平台（如 railway、Render 等）或个人 VPS 上一键构建安全隧道。
 
 ## ✨ 核心特性
 
@@ -45,6 +41,7 @@
 | :--- | :--- | :--- |
 | `UUID` | 你的节点连接密码 | `你的随机UUID` |
 | `ARGO_TOKEN` | Cloudflare Tunnel 的 Token | `eyJh...` |
+| `DOMAIN`|输入Zero Trust域名|
 
 uuid生成器 [点击生成](https://99688988.xyz/uuid-generator/)
 
@@ -64,6 +61,7 @@ uuid生成器 [点击生成](https://99688988.xyz/uuid-generator/)
 快捷分享链接 (URI 格式) 示例
 
 如果你熟悉直接拼接链接，它大概长这个样子（把中括号里的内容替换成你的真实信息）：
+
 vless://你的UUID@你的Tunnel域名（或者优选域名）:443?encryption=none&security=tls&sni=你的Tunnel域名&insecure=0&allowInsecure=0&type=ws&host=你的Tunnel域名&path=%2Fvless#Railway-Singbox
 
 如果速度太慢在 地址 (Address) 可换成优选域名 [点击获取优选域名](https://kjgx668.blogspot.com/2023/08/cloudflare-ip-cloudflare-cf.html)
