@@ -4,10 +4,7 @@
 sed -i "s/PASTE_YOUR_UUID_HERE/$UUID/g" config.json
 
 # ==========================================
-# 🛠️ 新增：轻量级保活 Web 响应服务
-# ==========================================
-# 利用 nc 监听 8080 端口，如果收到非 /vless 的根目录请求，直接返回 HTTP 200 
-# 这样既能应付 Koyeb 的健康检查，又不会堵塞真正的代理流量
+# 🛠️ 保活 Web 响应服务（独占 8080 端口）
 # ==========================================
 cat << 'EOF' > /app/web_server.sh
 #!/bin/sh
@@ -17,9 +14,9 @@ while true; do
 done
 EOF
 chmod +x /app/web_server.sh
-/app/web_server.sh & # 在后台悄悄运行
+/app/web_server.sh & 
 
-# 1. 后台运行 sing-box
+# 1. 后台运行 sing-box（此时它在内部监听 8050）
 sing-box run -c config.json &
 
 echo "=================================================================="
@@ -34,7 +31,7 @@ else
 fi
 echo "=================================================================="
 
-# 2. 前台运行 Cloudflare Tunnel 阻塞主进程
+# 2. 前台运行 Cloudflare Tunnel
 if [ -n "$ARGO_TOKEN" ]; then
     echo "正在启动 Cloudflare Tunnel..."
     cloudflared tunnel --no-autoupdate run --token $ARGO_TOKEN
